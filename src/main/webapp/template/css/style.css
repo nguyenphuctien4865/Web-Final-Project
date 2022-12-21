@@ -31,3 +31,8 @@
 .list-group-item .glyphicon {
     margin-right: 5px;
 }
+
+.card-category{
+    margin: 5px;
+    justify-content: center;
+}

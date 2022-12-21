@@ -1,0 +1,80 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
+
+:root {
+    --lg-font: 'Kaisei Tokumin', serif;
+    --sm-font: 'Poppins', sans-serif;
+}
+
+ body{
+    font-family: rgb(221, 21, 54);
+ }
+
+ .navbar{
+    box-shadow: 0 3px 9px 3px rgba(0, 0, 1, 0.1);
+ }
+
+ .navbar-brand img{
+    width: 40px;
+ }
+
+ .navbar-brand span{
+    letter-spacing: 2px;
+    font-family: rgb(221, 21, 54);
+ }
+
+ .nav-link:hover{
+    color: rgb(221, 21, 54) !important;
+ }
+
+ .nav-item {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+ }
+
+ #header{
+   background: url(../image/1x/logo3.png) top/cover no-repeat;
+ }
+
+ @media (min-width :992px) {
+    .nav-item{
+        border-bottom: none;
+    }
+ }
+ .carousel-inner h1{
+   font-size: 60px;
+   font-family: rgb(221, 21, 54);
+ }
+
+ .title h2::before{
+   position: absolute;
+   content: "";
+   width: 4px;
+   height: 50px;
+   background-color: rgb(221, 21, 54);
+   left: -20px;
+   top: 50%;
+   transform: translateY(-50%);
+ }
+
+ .btn-add-cart{
+   background-color: rgb(221, 21, 54);
+   color: #fff;
+   border-color: rgb(221, 21, 54);
+   padding: 10px 28px;
+   border-radius: 25px;
+}
+.btn-add-cart:hover{
+   background-color: #fff;
+   color: rgb(85, 85, 85);
+   border: 1px solid rgb(85, 85, 85);
+}
+
+.collection-img span{
+   top:20px;
+   right: 20px;   
+   width: 46px;
+   height: 46px;
+   border-radius: 50%;
+
+}
+

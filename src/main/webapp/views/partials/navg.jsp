@@ -34,8 +34,8 @@
                 </svg>
             </button>
             <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Đăng nhập</button>
-                <button class="dropdown-item" type="button">Đăng ký</button>
+                <a class="dropdown-item" role="button" href="${pageContext.request.contextPath}/Login/">Đăng nhập</a>
+                <a class="dropdown-item" role="button" href="${pageContext.request.contextPath}/Login/Logout">Đăng xuất</a>
             </div>
         </div>
     </div>
