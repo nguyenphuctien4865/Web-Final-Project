@@ -1,24 +1,30 @@
 package com.newspaper.app.beans;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Articles {
 
-    private String ArticlesID;
+    private String id;
     private String tittle;
+    private Timestamp publish_date;
     private int views;
     private String Abstract;
-    private String Content;
+    private String content;
     private String picture_main;
     private int preminum;
     private int status;
     private int categories_id;
     private int writer_id;
 
-    public Articles(String articlesID, String tittle, int views, String anAbstract, String content, String picture_main, int preminum, int status, int categories_id, int writer_id) {
-        ArticlesID = articlesID;
+    public Articles(String id, String tittle, Timestamp publish_date, int views, String anAbstract, String content, String picture_main, int preminum, int status, int categories_id, int writer_id) {
+        this.id = id;
         this.tittle = tittle;
+        this.publish_date = publish_date;
         this.views = views;
         Abstract = anAbstract;
-        Content = content;
+        this.content = content;
         this.picture_main = picture_main;
         this.preminum = preminum;
         this.status = status;
@@ -27,16 +33,15 @@ public class Articles {
     }
 
     public Articles() {
+
     }
 
-
-
-    public String getArticlesID() {
-        return ArticlesID;
+    public String getId() {
+        return id;
     }
 
-    public void setArticlesID(String articlesID) {
-        ArticlesID = articlesID;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTittle() {
@@ -45,6 +50,14 @@ public class Articles {
 
     public void setTittle(String tittle) {
         this.tittle = tittle;
+    }
+
+    public Timestamp getPublish_date() {
+        return publish_date;
+    }
+
+    public void setPublish_date(Timestamp publish_date) {
+        this.publish_date = publish_date;
     }
 
     public int getViews() {
@@ -64,11 +77,11 @@ public class Articles {
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
     public void setContent(String content) {
-        Content = content;
+        this.content = content;
     }
 
     public String getPicture_main() {

@@ -1,26 +1,24 @@
 package com.newspaper.app.beans;
 
 public class Categories {
-    private int CatID;
+    private int id;
     private String name;
 
-    public Categories(int catID, String name, int parentID) {
-        CatID = catID;
+    private int parent_id;
+
+    public Categories(int id, String name, int parent_id) {
+        this.id = id;
         this.name = name;
-        ParentID = parentID;
+        this.parent_id = parent_id;
+    }
+    public Categories(){}
+
+    public int getId() {
+        return id;
     }
 
-    private int ParentID;
-
-    public Categories() {
-    }
-
-    public int getCatID() {
-        return CatID;
-    }
-
-    public void setCatID(int catID) {
-        CatID = catID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -31,11 +29,11 @@ public class Categories {
         this.name = name;
     }
 
-    public int getParentID() {
-        return ParentID;
+    public int getParent_id() {
+        return parent_id;
     }
 
-    public void setParentID(int parentID) {
-        ParentID = parentID;
+    public void setParent_id(int parent_id) {
+        this.parent_id = parent_id;
     }
 }
