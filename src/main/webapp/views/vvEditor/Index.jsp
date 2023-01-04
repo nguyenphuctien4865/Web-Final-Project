@@ -11,6 +11,7 @@
 
 <jsp:useBean id="articles" scope="request" type="java.util.List<com.newspaper.app.beans.Articles>"/>
 
+
 <t:admin>
 <jsp:body>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">

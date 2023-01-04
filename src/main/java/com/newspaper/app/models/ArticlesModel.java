@@ -30,8 +30,8 @@ public class ArticlesModel {
              PreparedStatement statement = con.prepareStatement(query);
              ResultSet rs = statement.executeQuery();
              while (rs.next()) {
-                 list.add(new Articles(rs.getString(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
-                         rs.getString(6),rs.getNString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11)));
+                 list.add(new Articles(rs.getInt(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
+                         rs.getString(6),rs.getNString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12)));
              }
          }
          catch (ClassNotFoundException | SQLException e) {
@@ -55,8 +55,8 @@ public class ArticlesModel {
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                list.add(new Articles(rs.getString(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
-                        rs.getString(6),rs.getString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11)));
+                list.add(new Articles(rs.getInt(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
+                        rs.getString(6),rs.getString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12)));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -81,8 +81,8 @@ public class ArticlesModel {
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                list.add(new Articles(rs.getString(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
-                        rs.getString(6),rs.getString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11)));
+                list.add(new Articles(rs.getInt(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
+                        rs.getString(6),rs.getString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12)));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -91,6 +91,31 @@ public class ArticlesModel {
         }
         return list.get(0);
     }
+
+    public static void update(Articles articles) {
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "UPDATE articles SET title=?, publish_date=?, views=?, abstract=?, content=?, categories_id=?, picture_main=?, preminum=?,status=?, message=? where id = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1, articles.getTittle());
+            statement.setTimestamp(2, articles.getPublish_date());
+            statement.setInt(3,articles.getViews());
+            statement.setString(4, articles.getAbstract());
+            statement.setString(5, articles.getContent());
+            statement.setInt(6,articles.getCategories_id());
+            statement.setString(7,articles.getPicture_main());
+            statement.setInt(8,articles.getPreminum());
+            statement.setInt(9,articles.getStatus());
+            statement.setString(10,articles.getMessage());
+            statement.setInt(11,articles.getId());
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 }
 

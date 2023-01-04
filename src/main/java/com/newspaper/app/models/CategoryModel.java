@@ -65,4 +65,23 @@ public class CategoryModel {
         return list;
     }
 
+    public static List<Categories> update() {
+
+        List<Categories> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "select * from categories ";
+            PreparedStatement statement = con.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                list.add(new Categories(rs.getInt(1),rs.getString(2),rs.getInt(3)));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
 }

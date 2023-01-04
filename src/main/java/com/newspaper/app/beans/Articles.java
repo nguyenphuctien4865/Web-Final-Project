@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class Articles {
 
-    private String id;
+    private int id;
     private String tittle;
     private Timestamp publish_date;
     private int views;
@@ -18,7 +18,17 @@ public class Articles {
     private int categories_id;
     private int writer_id;
 
-    public Articles(String id, String tittle, Timestamp publish_date, int views, String anAbstract, String content, String picture_main, int preminum, int status, int categories_id, int writer_id) {
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private String message;
+
+    public Articles(int id, String tittle, Timestamp publish_date, int views, String anAbstract, String content, String picture_main, int preminum, int status, int categories_id, int writer_id,String message) {
         this.id = id;
         this.tittle = tittle;
         this.publish_date = publish_date;
@@ -30,17 +40,18 @@ public class Articles {
         this.status = status;
         this.categories_id = categories_id;
         this.writer_id = writer_id;
+        this.message = message;
     }
 
     public Articles() {
 
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

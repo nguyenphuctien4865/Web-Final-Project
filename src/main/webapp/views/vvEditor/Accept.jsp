@@ -11,6 +11,8 @@
 
 <jsp:useBean id="articlesDetail" scope="request" type="com.newspaper.app.beans.Articles"/>
 <jsp:useBean id="listCAT" scope="request" type="java.util.List<java.util.List<com.newspaper.app.beans.Categories>>"/>
+<jsp:useBean id="listTags" scope="request" type="java.util.List<com.newspaper.app.beans.Tags>"/>
+<jsp:useBean id="listTagArticles" scope="request" type="java.util.List<java.lang.Integer>"/>
 
 <t:admin>
     <jsp:body>
@@ -33,48 +35,57 @@
                             <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
                 --%>
 
-            <h2>Section title</h2>
             <div class="card">
                 <h4 class="card-header">
                         ${articlesDetail.tittle}
                 </h4>
                 <div class="card-body">
                     <form method="post">
-
+                        <div class="form-group">
+                            <label for="txtArticlesID">ID</label>
+                            <input type="text" class="form-control" id="txtArticlesID" name="articlesID" readonly value="${articlesDetail.id}">
+                        </div>
 
                         <p class="card-text">
                             <div class="form-group">
                                 <label for="categorySelect">Danh mục: </label>
-                                <select class="selectpicker form-control" id="categorySelect" name="category">
-                                    <option value="" disabled selected>Chọn danh mục</option>
+                                <select class="selectpicker form-control" id="categorySelect" name="category"  >
                                     <c:forEach begin="0" items="${listCAT}" var="p" varStatus="i">
                                             <optgroup label="${p[0].name}">
                                                 <c:forEach items="${p}" var="c" varStatus="loop">
                                                     <c:if test="${not loop.first}">
-                                                        <option value="${c.id}">${c.name}</option>
+                                                        <c:choose>
+                                                            <c:when test="${articlesDetail.categories_id==c.id}">
+                                                                <option selected value="${c.id}">${c.name}</option>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="${c.id}">${c.name}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </c:if>
                                                 </c:forEach>
                                             </optgroup>
-                                        </c:forEach>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </p>
 
                         <p class="card-text">
-                        <div class="form-group">
-                            <label for="tagsSelect">Tags: </label>
-                            <select class="form-control" id="tagsSelect" name="tags" multiple data-role="tagsinput>
-                                <c:forEach begin="0" items="${listCAT}" var="p" varStatus="i">
-                                    <optgroup label="${p[0].name}">
-                                        <c:forEach items="${p}" var="c" varStatus="loop">
-                                            <c:if test="${not loop.first}">
-                                                <option value="${c.id}">${c.name}</option>
-                                            </c:if>
-                                        </c:forEach>
-                                    </optgroup>
-                                </c:forEach>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label for="tagsSelect">Tags: </label>
+                                <select class="form-control selectpicker" id="tagsSelect" name="tags" multiple data-live-search="true">
+                                    <c:forEach items="${listTags}" var="p" varStatus="i">
+                                        <c:choose>
+                                            <c:when test="${listTagArticles.contains(p.id)}">
+                                                <option selected value="${p.id}">${p.value}</option>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="${p.id}">${p.value}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:forEach>
+                                </select>
+                            </div>
                         </p>
 
                         <p class="card-text">
@@ -92,10 +103,22 @@
                                 </div>
                             </div>
                         </p>
-
+                        <div class="card-footer">
+                            <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/editor/" role="button">
+                                <i class="fa fa-backward" aria-hidden="true"></i>
+                                List
+                            </a>
+                            <button type="submit" class="btn btn-primary" formaction="${pageContext.request.contextPath}/editor/submit">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                Duyêt
+                            </button>
+                        </div>
                     </form>
                 </div>
+
+
             </div>
         </main>
+
     </jsp:body>
 </t:admin>
