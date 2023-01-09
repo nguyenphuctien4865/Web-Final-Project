@@ -1,5 +1,7 @@
 package com.newspaper.app.beans;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class Users {
@@ -7,16 +9,16 @@ public class Users {
     private String Username;
     private String Password;
     private String Name;
-    private LocalDateTime Issue_at;
+    private Timestamp Issue_at;
     private int Expiration;
     private int Role;
     private String Second_name;
-    private LocalDateTime Dob;
+    private Date Dob;
     private String Email;
     private String Otp;
-    private String Otp_Exp;
+    private Timestamp Otp_Exp;
 
-    public Users(int userID, String username, String password, String name, LocalDateTime issue_at, int expiration, int role, String second_name, LocalDateTime dob, String email, String otp, String otp_Exp) {
+    public Users(int userID, String username, String password, String name, Timestamp issue_at, int expiration, int role, String second_name, Date dob, String email, String otp, Timestamp otp_Exp) {
         UserID = userID;
         Username = username;
         Password = password;
@@ -66,11 +68,11 @@ public class Users {
         Name = name;
     }
 
-    public LocalDateTime getIssue_at() {
+    public Timestamp getIssue_at() {
         return Issue_at;
     }
 
-    public void setIssue_at(LocalDateTime issue_at) {
+    public void setIssue_at(Timestamp issue_at) {
         Issue_at = issue_at;
     }
 
@@ -98,11 +100,11 @@ public class Users {
         Second_name = second_name;
     }
 
-    public LocalDateTime getDob() {
+    public Date getDob() {
         return Dob;
     }
 
-    public void setDob(LocalDateTime dob) {
+    public void setDob(Date dob) {
         Dob = dob;
     }
 
@@ -122,11 +124,11 @@ public class Users {
         Otp = otp;
     }
 
-    public String getOtp_Exp() {
+    public Timestamp getOtp_Exp() {
         return Otp_Exp;
     }
 
-    public void setOtp_Exp(String otp_Exp) {
+    public void setOtp_Exp(Timestamp otp_Exp) {
         Otp_Exp = otp_Exp;
     }
 }

@@ -18,6 +18,25 @@ public class Articles {
     private int categories_id;
     private int writer_id;
 
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
+    }
+
+    private Categories category;
+    public Users getWriter() {
+        return writer;
+    }
+
+    public void setWriter(Users writer) {
+        this.writer = writer;
+    }
+
+    private Users writer;
+
     public String getMessage() {
         return message;
     }
@@ -134,4 +153,5 @@ public class Articles {
     public void setWriter_id(int writer_id) {
         this.writer_id = writer_id;
     }
+
 }

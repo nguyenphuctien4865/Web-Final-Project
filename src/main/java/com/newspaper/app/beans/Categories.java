@@ -3,8 +3,17 @@ package com.newspaper.app.beans;
 public class Categories {
     private int id;
     private String name;
-
     private int parent_id;
+
+    public Categories getParentCAT() {
+        return parentCAT;
+    }
+
+    public void setParentCAT(Categories parentCAT) {
+        this.parentCAT = parentCAT;
+    }
+
+    private Categories parentCAT;
 
     public Categories(int id, String name, int parent_id) {
         this.id = id;

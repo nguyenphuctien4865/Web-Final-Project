@@ -10,7 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:useBean id="articlesDetail" scope="request" type="com.newspaper.app.beans.Articles"/>
-<jsp:useBean id="listCAT" scope="request" type="java.util.List<java.util.List<com.newspaper.app.beans.Categories>>"/>
+<jsp:useBean id="layoutCAT" scope="request" type="java.util.List<java.util.List<com.newspaper.app.beans.Categories>>"/>
 <jsp:useBean id="listTags" scope="request" type="java.util.List<com.newspaper.app.beans.Tags>"/>
 <jsp:useBean id="listTagArticles" scope="request" type="java.util.List<java.lang.Integer>"/>
 
@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label for="categorySelect">Danh mục: </label>
                                 <select class="selectpicker form-control" id="categorySelect" name="category"  >
-                                    <c:forEach begin="0" items="${listCAT}" var="p" varStatus="i">
+                                    <c:forEach begin="0" items="${layoutCAT}" var="p" varStatus="i">
                                             <optgroup label="${p[0].name}">
                                                 <c:forEach items="${p}" var="c" varStatus="loop">
                                                     <c:if test="${not loop.first}">

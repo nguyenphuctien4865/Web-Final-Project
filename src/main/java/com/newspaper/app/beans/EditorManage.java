@@ -5,6 +5,26 @@ public class EditorManage {
     private int EditorID;
     private int CategoryID;
 
+    private Users editor;
+
+    public Users getEditor() {
+        return editor;
+    }
+
+    public void setEditor(Users editor) {
+        this.editor = editor;
+    }
+
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
+    }
+
+    private Categories category;
+
     public EditorManage() {
     }
 

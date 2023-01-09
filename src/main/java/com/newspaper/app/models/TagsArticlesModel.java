@@ -49,7 +49,7 @@ public class TagsArticlesModel {
 
     public static void delete(int  id) {
         try (Connection con = DbUtils.initializeDatabase()){
-            String query = "DELETE FROM tags_has_articles WHERE id = ?";
+            String query = "DELETE FROM tags_has_articles WHERE articles_id = ?";
             PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1, id);
             statement.executeUpdate();

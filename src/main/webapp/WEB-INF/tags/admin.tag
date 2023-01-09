@@ -11,6 +11,8 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.101.0">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
     <title>Dashboard Template · Bootstrap v4.6</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
@@ -51,7 +53,7 @@
 
     <!-- Custom styles for this template -->
     <link href="${pageContext.request.contextPath}/template/css/viewAdmin.css" rel="stylesheet">
-
+    <link href="${pageContext.request.contextPath}/template/css/blog.css" rel="stylesheet">
     <jsp:invoke fragment="css" />
 
 </head>
@@ -79,18 +81,14 @@
 
 
 
-
+<script src="https://kit.fontawesome.com/f982360e56.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
 <%--Boostrap Script Core--%>
-<%--
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.bundle.min.js" integrity="sha512-V1C8ZvCFdIy1MIjZFmuC/oigiBDO8eZ/QvkY50Y8NycY/2J8TDizPVp+jL8ZP5SLR1FWYNsyr6iCEk4ZT/duCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
---%>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+<%--Boostrap Selected--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
 
@@ -119,9 +117,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
 
-<%--Boostrap Selected--%>
-<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/i18n/defaults-*.min.js"></script>--%>
 
 
 
@@ -131,14 +126,12 @@
     });
 </script>
 
-<script>
-    // take track if you clicked in the dialog inside the selectpicker area
-    //auto open
-    $('[data-id=mySel]').trigger('click');
-
-    //stay open
-    $(document).on("click", function () {
-        $('[data-id=mySel]').trigger('click');
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            format: 'DD-MM-YYYY',
+            defaultDate: moment().format(),
+        });
     });
 </script>
 <jsp:invoke fragment="js" />

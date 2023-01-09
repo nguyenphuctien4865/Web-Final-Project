@@ -26,7 +26,7 @@ public class LayoutFilter implements Filter {
     List<Categories> listCATp = CategoryModel.findParentCat(0);
     List<Categories> listCATc = CategoryModel.findParentCat(1);
 
-    int vertexCount = listCATp.size();
+    int vertexCount = listCATp.size() + listCATc.size();
     List<List<Categories>> graph = new ArrayList<>();
     for (int i = 0; i <= vertexCount; i++) {
       graph.add(new ArrayList());
@@ -40,7 +40,8 @@ public class LayoutFilter implements Filter {
         }
       }
     }
-    req.setAttribute("listCAT",graph);
+    req.setAttribute("layoutCAT",graph);
+    req.setCharacterEncoding("UTF-8");
 
     chain.doFilter(req, response);
   }

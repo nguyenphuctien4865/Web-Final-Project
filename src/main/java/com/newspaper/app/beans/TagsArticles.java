@@ -4,6 +4,25 @@ public class TagsArticles {
     private int TagID;
     private int ArticlesID;
 
+    public Tags getTag() {
+        return tag;
+    }
+
+    public void setTag(Tags tag) {
+        this.tag = tag;
+    }
+
+    public Articles getArticles() {
+        return articles;
+    }
+
+    public void setArticles(Articles articles) {
+        this.articles = articles;
+    }
+
+    private Tags tag;
+    private Articles articles;
+
     public TagsArticles() {
     }
 

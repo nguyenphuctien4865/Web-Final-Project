@@ -28,7 +28,7 @@
                 </button>--%>
                 <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/Admin/Category/Add" role="button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add Product
+                    Add Category
                 </a>
             </div>
         </div>

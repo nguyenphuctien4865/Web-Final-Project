@@ -16,7 +16,7 @@ public class DbUtils {
   public static Connection initializeDatabase() throws SQLException, ClassNotFoundException{
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
-      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newspaper_website", "root", "4865");
+      Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/newspaper_website?characterEncoding=utf8", "root", "4865");
       return conn;
     } catch (SQLException e) {
       e.printStackTrace();

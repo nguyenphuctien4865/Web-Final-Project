@@ -8,8 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="com.newspaper.app.config.Constant"%>
 
-<jsp:useBean id="listCAT" scope="request" type="java.util.List<com.newspaper.app.beans.Categories>"/>
+<jsp:useBean id="ListART" scope="request" type="java.util.List<com.newspaper.app.beans.Articles>"/>
 
 
 <t:admin>
@@ -26,22 +27,19 @@
                     <span data-feather="calendar"></span>
                     This week
                 </button>--%>
-                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/Admin/Category/Add" role="button">
+                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/Admin/Tag/Add" role="button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add Product
+                    Add Articles
                 </a>
             </div>
         </div>
 
-            <%--
-                        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-            --%>
 
         <h2>Section title</h2>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <c:choose>
-                    <c:when test="${listCAT.size()==0}">
+                    <c:when test="${ListART.size()==0}">
                         <tr>
                             <th>Không có dữ liễu</th>
                         </tr>
@@ -50,22 +48,31 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tên danh mục</th>
-                            <th>Danh mục gốc</th>
+                            <th>Tiêu đề</th>
+                            <th>Mô tả</th>
+                            <th>Lượt xem</th>
+                            <th>Trạng thái</th>
+                            <th>&nbsp;</th>
                             <th>&nbsp;</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${listCAT}"  var="c">
+                            <c:forEach items="${ListART}"  var="c">
                                 <tr>
                                     <th>${c.id}</th>
-                                    <th>${c.name}</th>
-                                    <th>${c.parentCAT.name}</th>
+                                    <th>${c.tittle}</th>
+                                    <th>${c['abstract']}</th>
+                                    <th>${c.preminum}</th>
+                                    <th>${Constant.STATUS[c.status]}</th>
                                     <th>
-                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/Category/Edit?id=${c.id}" role="button">
+                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/Articles/Edit?id=${c.id}" role="button">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                         </a>
-
+                                    </th>
+                                    <th>
+                                        <a class="btn btn-sm btn-outline-primary" href="${pageContext.request.contextPath}/Admin/Articles/Delete?articlesID=${c.id}" role="button">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </a>
                                     </th>
                                 </tr>
                             </c:forEach>

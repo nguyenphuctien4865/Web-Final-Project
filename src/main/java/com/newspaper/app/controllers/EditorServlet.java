@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.newspaper.app.config.Constant.sdf;
+
 
 @WebServlet(name = "EditorServlet", value = "/editor/*")
 public class EditorServlet extends HttpServlet {
@@ -111,16 +113,10 @@ public class EditorServlet extends HttpServlet {
         Articles a = ArticlesModel.findbyID(id);
         int catID = Integer.parseInt(request.getParameter("category"));
         int[] tagsID = Method.StringArrToIntArr(request.getParameterValues("tags"));
-        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DateFormat dfm = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
-
-        String[] datetime = (request.getParameter("datetime")).split(" ");
-        String date = datetime[0];
-        String time = datetime[1];
-        String state = datetime[2];
-        System.out.println(datetime);
         Date date1 = dfm.parse(request.getParameter("datetime"));
         Timestamp datetimeFormmat = Timestamp.valueOf(sdf.format(date1));
+
         TagsArticlesModel.delete(id);
         for (int tag: tagsID) {
             TagsArticlesModel.insert(tag,id);
