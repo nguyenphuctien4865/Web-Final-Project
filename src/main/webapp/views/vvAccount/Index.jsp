@@ -12,11 +12,11 @@
 
 <html>
 <head>
-  <title>Title</title>
+    <title>Sign In</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../../template/css/Login_Regis.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/template/css/Login_Regis.css">
 
 </head>
 <body>
@@ -26,52 +26,65 @@
       <div class="col-md-9 col-lg-6 col-xl-5">
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
              class="img-fluid" alt="Sample image">
+        <a class="btn btn-lg btn-outline-info" href="${pageContext.request.contextPath}/Home/" role="button">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          Home
+        </a>
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form>
+        <c:if test="${hasError}">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Login failed!</strong> ${errorMessage}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </c:if>
+        <form action="${pageContext.request.contextPath}/Account/Login" method="post" >
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-            <p class="lead fw-normal mb-0 me-3">Register</p>
+            <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+            <button type="button" class="btn btn-primary btn-floating mx-1">
+              <i class="fa fa-facebook-f"></i>
+            </button>
+
+
           </div>
 
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+          </div>
 
-
+          <!-- Email input -->
           <div class="form-outline mb-4">
-            <input type="text" id="form3Example1cg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example1cg">Your Name</label>
+            <label class="form-label" for="form3Example3">Username</label>
+            <input name="username" type="text" id="form3Example3" class="form-control form-control-lg"
+                   placeholder="Enter a valid email address" />
           </div>
 
-          <div class="form-outline mb-4">
-            <input type="email" id="form3Example3cg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example3cg">Your Email</label>
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <label class="form-label" for="form3Example4">Password</label>
+            <input type="password" id="form3Example4" class="form-control form-control-lg"
+                   name="password" placeholder="Enter password" />
           </div>
 
-          <div class="form-outline mb-4">
-            <input type="text" id="form3Example2cg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example3cg">Username</label>
+          <div class="d-flex justify-content-between align-items-center">
+            <!-- Checkbox -->
+            <div class="form-check mb-0">
+              <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
+              <label class="form-check-label" for="form2Example3">
+                Remember me
+              </label>
+            </div>
+            <a href="#!" class="text-body">Forgot password?</a>
           </div>
-
-          <div class="form-outline mb-4">
-            <input type="password" id="form3Example4cg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example4cg">Password</label>
-          </div>
-
-          <div class="form-outline mb-4">
-            <input type="password" id="form3Example4cdg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-          </div>
-
-          <div class="form-outline mb-4">
-            <input type="date" id="form3Example5cdg" class="form-control form-control-lg" />
-            <label class="form-label" for="form3Example4cdg">Ngày sinh</label>
-          </div>
-
-
 
           <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="button" class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Đăng ký</button>
-            <p class="small fw-bold mt-2 pt-1 mb-0"> Have an account? <a href="${pageContext.request.contextPath}/Login/"
-                                                                              class="link-danger">Login</a></p>
+            <button type="submit" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+              <a href="${pageContext.request.contextPath}/Account/Register" class="link-danger">Register</a>
+            </p>
           </div>
 
         </form>
@@ -105,7 +118,6 @@
   </div>
 </section>
 
-<script src="../../template/js/Login.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>

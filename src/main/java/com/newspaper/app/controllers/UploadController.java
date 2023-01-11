@@ -1,11 +1,9 @@
 package com.newspaper.app.controllers;
 
-import com.newspaper.app.beans.Articles;
-import com.newspaper.app.models.ArticlesModel;
-import com.newspaper.app.models.CategoryModel;
-import com.newspaper.app.services.UploadFile;
-import com.newspaper.app.utils.DbUtils;
-import com.newspaper.app.utils.ServletUtils;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,10 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.sql.Timestamp;
+
+import com.newspaper.app.beans.Articles;
+import com.newspaper.app.models.ArticlesModel;
+import com.newspaper.app.models.CategoryModel;
+import com.newspaper.app.services.UploadFile;
+import com.newspaper.app.utils.ServletUtils;
 
 @WebServlet(value = "/upload")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -29,9 +29,10 @@ public class UploadController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		RequestDispatcher rd = req.getRequestDispatcher("/views/vvUpload/upload.jsp");
 		String id = req.getParameter("id");
 		System.out.println("====== >id post: " + id);
-		
+
 		req.setAttribute("listCategory", categoryModel.findAll());
 		if (id != null) {
 			Articles a = ArticlesModel.findbyID(Integer.valueOf(id));
@@ -41,7 +42,7 @@ public class UploadController extends HttpServlet {
 				resp.sendRedirect(req.getContextPath() + "/listupload");
 			}
 		}
-		ServletUtils.forward("/views/vvUpload/upload.jsp",req,resp);
+		rd.forward(req, resp);
 	}
 
 	@Override
@@ -65,7 +66,7 @@ public class UploadController extends HttpServlet {
 
 		Part part = req.getPart("picturemain");
 		System.out.println("---path: " + part);
-		String path = req.getServletContext().getRealPath("/img");
+		String path = req.getServletContext().getRealPath("/public/img");
 
 		String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
 		if (!filename.equals("")) {

@@ -27,7 +27,7 @@
                     <span data-feather="calendar"></span>
                     This week
                 </button>--%>
-                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/Admin/Tag/Add" role="button">
+                <a class="btn btn-outline-success" href="${pageContext.request.contextPath}/Admin/Articles/Add" role="button">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Add Articles
                 </a>

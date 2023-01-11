@@ -112,8 +112,21 @@ public class UsersModel {
     }
 
 
+    public static Users findByUsername(String username) {
+        List<Users> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "select * from users where username = ?";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setString(1,username);
 
-
-
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                list.add(new Users(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getTimestamp(5),rs.getInt(6),rs.getInt(7),rs.getString(8),rs.getDate(9),rs.getString(10),rs.getString(11),rs.getTimestamp(12)));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list.get(0);
+    }
 }
 

@@ -106,7 +106,7 @@
 				<label>title</label> 
 				<input type="text" class="form-control" name="title" value="${articles.tittle}">
 				<label>Abstract</label> 
-				<input type="text" class="form-control" name="abstract" value="${articles.abstracts}">
+				<input type="text" class="form-control" name="abstract" value="${articles['abstract']}">
 				<label>preminum</label> 
 				<input type="number" class="form-control" name="preminum" value="${articles.preminum}">
 				<label>picture main</label> 

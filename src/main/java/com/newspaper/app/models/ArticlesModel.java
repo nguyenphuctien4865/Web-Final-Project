@@ -47,6 +47,73 @@ public class ArticlesModel {
 
 		return list;
     }
+
+    public static List<Articles> findbyCAT(int catID, int id) {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase() ){
+            String query = "select * from articles where categories_id = ? AND id <> ? LIMIT 5";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,catID);
+            statement.setInt(2,id);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        }
+        catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public static List<Articles> findallbyCAT(int catID) {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase() ){
+            String query = "select * from articles where categories_id = ? ";
+            PreparedStatement statement = con.prepareStatement(query);
+            statement.setInt(1,catID);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        }
+        catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
     public static List<Articles> findbyStatus(int status) {
 
         List<Articles> list = new ArrayList<>();
@@ -83,14 +150,27 @@ public class ArticlesModel {
     public static Articles findbyID(int ID) {
         List<Articles> list = new ArrayList<>();
         try (Connection con = DbUtils.initializeDatabase()){
-            String query = "select * from articles where status = ?";
+            String query = "select * from articles where ID = ?";
             PreparedStatement statement = con.prepareStatement(query);
             statement.setInt(1,ID);
 
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
-                list.add(new Articles(rs.getInt(1), rs.getString(2),(rs.getTimestamp(3)),rs.getInt(4),rs.getString(5),
-                        rs.getString(6),rs.getString(7), rs.getInt(8),rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12)));
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -144,6 +224,139 @@ public class ArticlesModel {
             throw new RuntimeException(e);
         }
         return list.get(0);
+    }
+
+    public static List<Articles> findbyViewWeek() {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "SELECT * FROM newspaper_website.articles  WHERE  (YEARWEEK(`publish_date`, 1) = YEARWEEK(CURDATE(), 1)) ORDER BY views desc LIMIT 5;";
+            PreparedStatement statement = con.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public static List<Articles> findbyView() {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "SELECT * FROM newspaper_website.articles ORDER BY views desc LIMIT 10;";
+            PreparedStatement statement = con.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public static List<Articles> findbyDate() {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = "SELECT * FROM newspaper_website.articles ORDER BY publish_date desc LIMIT 10;";
+            PreparedStatement statement = con.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    public static List<Articles> findbyCat() {
+
+        List<Articles> list = new ArrayList<>();
+        try (Connection con = DbUtils.initializeDatabase()){
+            String query = " select articles.* from articles,(Select  max(a.publish_date) maxdate, a.categories_id from articles a  inner join (SELECT c.*, count(a.id) as npa \n" +
+                    "\t\tFROM categories  c\n" +
+                    "\t\tleft join articles a  \n" +
+                    "\t\ton c.id = a.categories_id\n" +
+                    "\t\tgroup by c.id order by npa desc limit 10  ) c  on a.categories_id = c.id group by a.categories_id) time_cat \n" +
+                    "        where articles.categories_id= time_cat.categories_id and articles.publish_date = maxdate";
+            PreparedStatement statement = con.prepareStatement(query);
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Articles a = new Articles();
+                a.setId(rs.getInt("id"));
+                a.setTittle(rs.getString("title"));
+                a.setPublish_date(rs.getTimestamp("publish_date"));
+                a.setViews(rs.getInt("views"));
+                a.setAbstract(rs.getString("abstract"));
+                a.setContent(rs.getString("content"));
+                a.setCategories_id(rs.getInt("categories_id"));
+                a.setPicture_main(rs.getString("picture_main"));
+                a.setPreminum(rs.getInt("preminum"));
+                a.setWriter_id(rs.getInt("writer_id"));
+                a.setStatus(rs.getInt("status"));
+                a.setMessage(rs.getString("message"));
+                list.add(a);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     public static void update(Articles articles) {

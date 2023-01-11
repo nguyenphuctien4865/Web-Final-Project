@@ -9,6 +9,7 @@ import com.newspaper.app.models.TagsArticlesModel;
 import com.newspaper.app.models.TagsModel;
 import com.newspaper.app.utils.ServletUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -54,8 +55,21 @@ public class AdminArticlesServlet extends HttpServlet {
                 }
                 break;
             case "/Add":
-                request.setAttribute("ListCATp", CategoryModel.findParentCat(0));
-                ServletUtils.forward("/views/viewAdministrator/Tag/Add.jsp",request,response);
+                request.setAttribute("listCategory", CategoryModel.findAll());
+                RequestDispatcher rd = request.getRequestDispatcher("/views/vvUpload/upload.jsp");
+                String ida = request.getParameter("id");
+                System.out.println("====== >id post: " + ida);
+
+                request.setAttribute("listCategory", CategoryModel.findAll());
+                if (ida != null) {
+                    Articles at = ArticlesModel.findbyID(Integer.valueOf(ida));
+                    System.out.println("====a: " + at);
+                    request.setAttribute("articles", at);
+                    if(at.getStatus() < 3) {
+                        response.sendRedirect(request.getContextPath() + "/listupload");
+                    }
+                }
+                rd.forward(request, response);
                 break;
             default:
                 ServletUtils.forward("/views/404.jsp", request, response);

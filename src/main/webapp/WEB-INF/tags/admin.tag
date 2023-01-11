@@ -13,7 +13,7 @@
     <meta name="generator" content="Hugo 0.101.0">
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
-    <title>Dashboard Template · Bootstrap v4.6</title>
+    <title>Dashboard</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
     <!-- Bootstrap core CSS -->
@@ -60,14 +60,25 @@
 <body>
 
 <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Admin</a>
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">
+        <c:choose>
+            <c:when test="${auth}">
+                ${Constant.role[authUser.role]}
+            </c:when>
+            <c:otherwise>
+                Trang quản lý
+            </c:otherwise>
+        </c:choose>
+    </a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <form id="frmLogout" action="${pageContext.request.contextPath}/Account/Logout" method="post">
+            <a class="nav-link" href="javascript: $('#frmLogout').submit()">Sign out</a>
+            </form>
         </li>
     </ul>
 </nav>

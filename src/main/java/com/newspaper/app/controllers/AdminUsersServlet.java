@@ -66,6 +66,8 @@ public class AdminUsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
         String path = request.getPathInfo();
         switch (path) {
 
@@ -118,7 +120,17 @@ public class AdminUsersServlet extends HttpServlet {
 
     private void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, ParseException {
         int id = Integer.parseInt(request.getParameter("id"));
+
         Users u = UsersModel.findbyID(id);
+        int role = Integer.parseInt(request.getParameter("UserRole"));
+
+        if (u.getRole()==1){
+            int[] catID = Method.StringArrToIntArr(request.getParameterValues("category"));
+            TagsArticlesModel.delete(id);
+            for (int cat: catID) {
+                EditorManageModel.insert(cat,id);
+            }
+        }
 
         String name= request.getParameter("UserName");
         String name2= request.getParameter("UserName2");
@@ -128,7 +140,6 @@ public class AdminUsersServlet extends HttpServlet {
 
         Date dateutil = new SimpleDateFormat("dd-MM-yyyy").parse( request.getParameter("UserDoB"));
         java.sql.Date dob = new java.sql.Date( dateutil.getTime());
-        int role = Integer.parseInt(request.getParameter("UserRole"));
 
         Users uNew = new Users(id, u.getUsername(),password,name,u.getIssue_at(), u.getExpiration(), role,name2,dob,email,u.getOtp(),u.getOtp_Exp());
         UsersModel.update(uNew);

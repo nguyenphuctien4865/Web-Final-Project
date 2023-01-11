@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page
-        language=`1`"java"
+        language="java"
         contentType="text/html; charset=UTF-8"
         pageEncoding="UTF-8"
 %><%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -16,6 +16,7 @@
 
 <jsp:useBean id="User" scope="request" type="com.newspaper.app.beans.Users"/>
 <fmt:parseDate value="${dateString}" var="dateObject" pattern="yyyy-MM-dd HH:mm:ss" />
+<jsp:useBean id="layoutCAT" scope="request" type="java.util.List<java.util.List<com.newspaper.app.beans.Categories>>"/>
 
 <t:admin>
 <jsp:body>
@@ -26,10 +27,6 @@
 
             </div>
         </div>
-
-            <%--
-                        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
-            --%>
 
         <form action="" method="post">
             <div class="card">
@@ -88,6 +85,30 @@
                             </div>
                         </div>
                     </div>
+
+                        <c:if test="${User.role==1}">
+                            <div class="form-group">
+                            <label for="categorySelect">Danh mục: </label>
+                            <select class="selectpicker form-control" id="categorySelect" name="category"   multiple>
+                                <c:forEach begin="0" items="${layoutCAT}" var="p" varStatus="i">
+                                    <optgroup label="${p[0].name}">
+                                        <c:forEach items="${p}" var="c" varStatus="loop">
+                                            <c:if test="${not loop.first}">
+                                                <c:choose>
+                                                    <c:when test="${articlesDetail.categories_id==c.id}">
+                                                        <option selected value="${c.id}">${c.name}</option>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <option value="${c.id}">${c.name}</option>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:if>
+                                        </c:forEach>
+                                    </optgroup>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        </c:if>
                     <div class="">
                         <c:choose >
                             <c:when test="${User.issue_at==null}">
